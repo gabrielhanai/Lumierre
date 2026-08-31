@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sacola — Lumierre Boutique</title>
+  <meta name="description" content="Finalize seu pedido na Lumierre Boutique. Pagamento via Pix.">
+  <meta name="theme-color" content="#F4EFEB">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <header class="cabecalho" data-cabecalho></header>
+
+  <main id="conteudo">
+    <section class="secao" style="padding-top: clamp(2rem, 5vw, 3.5rem)">
+      <div class="container">
+
+        <!-- Indicador de etapas -->
+        <div class="etapas" data-etapas>
+          <span class="etapas__item etapas__item--ativa" data-etapa="sacola">1. Sua sacola</span>
+          <span class="etapas__traco" aria-hidden="true"></span>
+          <span class="etapas__item" data-etapa="dados">2. Seus dados</span>
+          <span class="etapas__traco" aria-hidden="true"></span>
+          <span class="etapas__item" data-etapa="pagamento">3. Pagamento</span>
+        </div>
+
+
+        <!-- ==============================================================
+             ESTADO A — sacola vazia
+             ============================================================== -->
+        <div class="sacola__vazia" data-estado-vazio hidden>
+          <p class="sobretitulo">Sacola</p>
+          <h1 style="font-size: clamp(1.75rem, 4.5vw, 2.5rem); margin-bottom: 1rem">
+            Sua sacola está vazia
+          </h1>
+          <p>Escolha um modelo e ele aparece aqui.</p>
+          <a class="btn btn--primario" href="produtos.html">Ver a coleção</a>
+        </div>
+
+
+        <!-- ==============================================================
+             ESTADO B — sacola com itens + formulário
+             ============================================================== -->
+        <div data-estado-sacola hidden>
+          <h1 class="sr-apenas">Sua sacola</h1>
+
+          <div class="sacola">
+
+            <!-- Itens -->
+            <div>
+              <h2 class="painel__titulo" style="margin-bottom: 0.5rem">
+                Itens do pedido
+              </h2>
+              <div data-lista-sacola></div>
+
+              <a class="link-texto" href="produtos.html"
+                 style="display: inline-block; margin-top: 1.75rem">
+                &larr; Continuar escolhendo
+              </a>
+            </div>
+
+            <!-- Resumo + dados do cliente -->
+            <div class="sacola__resumo">
+              <div class="painel">
+                <h2 class="painel__titulo">Resumo</h2>
+
+                <div class="linha-total">
+                  <span data-resumo-qtd>0 itens</span>
+                  <span data-resumo-subtotal>R$ 0,00</span>
+                </div>
+                <div class="linha-total">
+                  <span>Entrega</span>
+                  <span>a combinar</span>
+                </div>
+                <div class="linha-total linha-total--destaque">
+                  <span>Total</span>
+                  <span data-resumo-total>R$ 0,00</span>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--linha); margin-block: 1.75rem">
+
+                <h2 class="painel__titulo">Seus dados</h2>
+
+                <form data-form-checkout novalidate>
+                  <div class="campo">
+                    <label class="campo__rotulo" for="nome">Nome completo</label>
+                    <input class="campo__entrada" id="nome" name="nome"
+                           type="text" autocomplete="name" required
+                           placeholder="Como podemos te chamar">
+                    <span class="campo__erro" data-erro="nome"></span>
+                  </div>
+
+                  <div class="campo">
+                    <label class="campo__rotulo" for="whatsapp">WhatsApp</label>
+                    <input class="campo__entrada" id="whatsapp" name="whatsapp"
+                           type="tel" inputmode="tel" autocomplete="tel" required
+                           placeholder="(61) 99999-9999">
+                    <span class="campo__dica">É por aqui que combinamos a entrega.</span>
+                    <span class="campo__erro" data-erro="whatsapp"></span>
+                  </div>
+
+                  <div class="campo">
+                    <label class="campo__rotulo" for="email">E-mail</label>
+                    <input class="campo__entrada" id="email" name="email"
+                           type="email" inputmode="email" autocomplete="email" required
+                           placeholder="voce@email.com">
+                    <span class="campo__erro" data-erro="email"></span>
+                  </div>
+
+                  <div class="campo">
+                    <label class="campo__rotulo" for="observacao">
+                      Observação <span style="text-transform: none; letter-spacing: 0">(opcional)</span>
+                    </label>
+                    <textarea class="campo__entrada" id="observacao" name="observacao"
+                              placeholder="Bairro para entrega, ponto de referência, presente..."></textarea>
+                  </div>
+
+                  <div class="campo-check">
+                    <input type="checkbox" id="consentimento" name="consentimento" required>
+                    <label for="consentimento">
+                      Autorizo a Lumierre Boutique a usar meu WhatsApp e e-mail
+                      para tratar deste pedido. Não repassamos seus dados a
+                      terceiros e você pode pedir a exclusão a qualquer momento.
+                    </label>
+                  </div>
+                  <span class="campo__erro" data-erro="consentimento"
+                        style="display: block; margin-top: -1rem; margin-bottom: 1rem"></span>
+
+                  <div class="aviso aviso--erro" data-erro-geral hidden></div>
+
+                  <button class="btn btn--primario btn--bloco" type="submit" data-btn-gerar>
+                    Gerar Pix e finalizar
+                  </button>
+
+                  <p class="campo__dica" style="text-align: center; margin-top: 0.875rem">
+                    <span data-aviso-entrega></span>
+                  </p>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ==============================================================
+             ESTADO C — pagamento via Pix
+             ============================================================== -->
+        <div data-estado-pagamento hidden>
+          <div style="max-width: 34rem; margin-inline: auto">
+            <div class="painel pix">
+
+              <p class="sobretitulo">Pedido registrado</p>
+              <h1 style="font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1.75rem">
+                Falta só o pagamento
+              </h1>
+
+              <p class="pix__valor" data-pix-valor>R$ 0,00</p>
+              <p class="pix__recebedor">
+                para <strong data-pix-nome></strong>
+              </p>
+
+              <div class="pix__qr" data-pix-qr>
+                <canvas data-pix-canvas aria-label="QR Code do Pix"></canvas>
+              </div>
+
+              <div class="aviso aviso--erro" data-pix-erro hidden></div>
+
+              <label class="campo__rotulo" style="text-align: left" for="pix-codigo">
+                Ou use o Pix Copia e Cola
+              </label>
+              <textarea class="pix__codigo" id="pix-codigo" data-pix-codigo
+                        readonly rows="4"
+                        aria-label="Código Pix Copia e Cola"></textarea>
+
+              <div class="pix__acoes">
+                <button class="btn btn--primario btn--bloco" type="button" data-btn-copiar>
+                  Copiar código Pix
+                </button>
+                <a class="btn btn--whatsapp btn--bloco" data-btn-whatsapp
+                   target="_blank" rel="noopener" href="#">
+                  Enviar comprovante no WhatsApp
+                </a>
+              </div>
+
+              <div class="aviso aviso--info" style="text-align: left">
+                O site não confirma o pagamento sozinho. Depois de pagar,
+                mande o comprovante no WhatsApp para a gente liberar a entrega.
+              </div>
+
+              <div class="pix__passos">
+                <p class="pix__passo">Abra o app do seu banco e escolha pagar com Pix.</p>
+                <p class="pix__passo">Escaneie o QR Code acima ou cole o código copiado.</p>
+                <p class="pix__passo">Confira o valor e o nome do recebedor antes de confirmar.</p>
+                <p class="pix__passo">Envie o comprovante no WhatsApp e combinamos a entrega.</p>
+              </div>
+
+              <p class="pix__txid">
+                Código do pedido: <strong data-pix-txid></strong><br>
+                Guarde este código — é por ele que localizamos seu pagamento.
+              </p>
+
+              <p style="margin-top: 1.75rem">
+                <a class="link-texto" href="produtos.html">Voltar para a coleção</a>
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape" data-rodape></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/pix.js"></script>
+  <script src="js/qrcode.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

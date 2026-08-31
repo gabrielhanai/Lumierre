@@ -1,0 +1,865 @@
+/* ==========================================================================
+   LUMIERRE BOUTIQUE — Componentes
+   Botões, cards, galeria, FAQ, formulários, sacola e caixa do Pix.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  /* min-height garante o alvo de toque de 44px no celular */
+  min-height: 46px;
+  padding: 0.8rem 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: background-color var(--transicao), color var(--transicao),
+    border-color var(--transicao), transform var(--transicao);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primario {
+  background: var(--tinta);
+  color: var(--branco);
+  border-color: var(--tinta);
+}
+
+.btn--primario:hover {
+  background: var(--taupe);
+  border-color: var(--taupe);
+}
+
+.btn--secundario {
+  background: transparent;
+  color: var(--tinta);
+  border-color: var(--linha-forte);
+}
+
+.btn--secundario:hover {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--branco);
+}
+
+/* Variante para usar sobre o vídeo do hero */
+.btn--claro {
+  background: var(--branco);
+  color: var(--tinta);
+  border-color: var(--branco);
+}
+
+.btn--claro:hover {
+  background: transparent;
+  color: var(--branco);
+}
+
+.btn--contorno-claro {
+  background: transparent;
+  color: var(--branco);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.btn--contorno-claro:hover {
+  background: var(--branco);
+  color: var(--tinta);
+  border-color: var(--branco);
+}
+
+.btn--whatsapp {
+  background: #1faa54;
+  color: var(--branco);
+  border-color: #1faa54;
+}
+
+.btn--whatsapp:hover {
+  background: #17853f;
+  border-color: #17853f;
+}
+
+.btn--bloco {
+  width: 100%;
+}
+
+.btn--confirmado {
+  background: var(--taupe) !important;
+  border-color: var(--taupe) !important;
+  color: var(--branco) !important;
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Link em texto, com sublinhado que cresce no hover */
+.link-texto {
+  display: inline-block;
+  color: var(--taupe);
+  border-bottom: 1px solid var(--linha-forte);
+  padding-bottom: 1px;
+  transition: color var(--transicao), border-color var(--transicao);
+}
+
+.link-texto:hover {
+  color: var(--tinta);
+  border-bottom-color: var(--tinta);
+}
+
+
+/* ==========================================================================
+   CARD DE PRODUTO
+   ========================================================================== */
+.card-produto {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-produto__link {
+  display: block;
+}
+
+.card-produto__midia {
+  position: relative;
+  /* Proporção fixa evita o "pulo" do layout enquanto a foto carrega */
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  margin-bottom: 1.1rem;
+}
+
+.card-produto__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 500ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-produto__foto--verso {
+  opacity: 0;
+}
+
+/* A troca de foto no hover só faz sentido onde existe mouse de verdade */
+@media (hover: hover) and (pointer: fine) {
+  .card-produto__link:hover .card-produto__foto--frente {
+    opacity: 0;
+  }
+
+  .card-produto__link:hover .card-produto__foto--verso {
+    opacity: 1;
+  }
+
+  .card-produto__link:hover .card-produto__foto {
+    transform: scale(1.04);
+  }
+}
+
+.card-produto__info {
+  margin-bottom: 1rem;
+}
+
+.card-produto__nome {
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-produto__subtitulo {
+  font-size: 0.82rem;
+  color: var(--taupe);
+  margin-bottom: 0.5rem;
+}
+
+.card-produto__preco {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--tinta);
+}
+
+.card-produto__btn {
+  margin-top: auto;
+}
+
+
+/* ==========================================================================
+   PÁGINA DE PRODUTO
+   ========================================================================== */
+.produto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .produto {
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .produto__info {
+    position: sticky;
+    top: 7rem;
+  }
+}
+
+/* --- Galeria --- */
+.galeria__principal {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  margin-bottom: 0.85rem;
+}
+
+.galeria__foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.galeria__miniaturas {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.galeria__miniatura {
+  position: relative;
+  width: 78px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--linha);
+  background: var(--branco);
+  transition: border-color var(--transicao), opacity var(--transicao);
+  opacity: 0.6;
+}
+
+.galeria__miniatura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.galeria__miniatura:hover {
+  opacity: 1;
+}
+
+.galeria__miniatura--ativa {
+  border-color: var(--taupe);
+  opacity: 1;
+}
+
+/* --- Informações --- */
+.produto__nome {
+  margin-bottom: 0.4rem;
+}
+
+.produto__subtitulo {
+  color: var(--taupe);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.produto__preco {
+  font-size: 1.6rem;
+  font-family: var(--fonte-display);
+  margin-bottom: 1.75rem;
+}
+
+.produto__descricao {
+  margin-bottom: 1.75rem;
+  color: var(--tinta);
+}
+
+.produto__detalhes {
+  display: grid;
+  gap: 0.6rem;
+  padding-block: 1.5rem;
+  margin-bottom: 1.75rem;
+  border-block: 1px solid var(--linha);
+}
+
+.produto__detalhes li {
+  position: relative;
+  padding-left: 1.15rem;
+  font-size: 0.9rem;
+  color: var(--taupe);
+}
+
+.produto__detalhes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 5px;
+  height: 1px;
+  background: var(--taupe);
+}
+
+.produto__compra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+}
+
+.produto__compra .btn {
+  flex: 1 1 12rem;
+}
+
+.produto__aviso {
+  font-size: 0.85rem;
+  color: var(--taupe);
+}
+
+
+/* ==========================================================================
+   SELETOR DE QUANTIDADE
+   ========================================================================== */
+.quantidade {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--linha-forte);
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.quantidade__btn {
+  width: 44px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  color: var(--tinta);
+  transition: background-color var(--transicao);
+}
+
+.quantidade__btn:hover {
+  background: var(--areia-escura);
+}
+
+.quantidade__campo {
+  width: 3rem;
+  height: 46px;
+  text-align: center;
+  border: none;
+  border-inline: 1px solid var(--linha);
+  background: transparent;
+  font-size: 0.95rem;
+  /* Esconde as setinhas nativas do input number */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.quantidade__campo::-webkit-outer-spin-button,
+.quantidade__campo::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   FAQ (accordion nativo com <details>)
+   ========================================================================== */
+.faq__item {
+  border-bottom: 1px solid var(--linha);
+}
+
+.faq__pergunta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--tinta);
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--transicao);
+}
+
+/* Remove o triângulo padrão do <summary> */
+.faq__pergunta::-webkit-details-marker {
+  display: none;
+}
+
+.faq__pergunta:hover {
+  color: var(--taupe);
+}
+
+/* Sinal de + que vira − quando aberto */
+.faq__sinal {
+  position: relative;
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+}
+
+.faq__sinal::before,
+.faq__sinal::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 13px;
+  height: 1.5px;
+  background: var(--taupe);
+  transition: transform var(--transicao);
+}
+
+.faq__sinal::after {
+  transform: rotate(90deg);
+}
+
+.faq__item[open] .faq__sinal::after {
+  transform: rotate(0deg);
+}
+
+.faq__resposta {
+  padding-bottom: 1.5rem;
+  color: var(--taupe);
+  font-size: 0.94rem;
+  max-width: 60ch;
+}
+
+
+/* ==========================================================================
+   SACOLA
+   ========================================================================== */
+.sacola {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+@media (min-width: 940px) {
+  .sacola {
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .sacola__resumo {
+    position: sticky;
+    top: 7rem;
+  }
+}
+
+.sacola__item {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 1.1rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--linha);
+  align-items: start;
+}
+
+.sacola__item:first-child {
+  padding-top: 0;
+}
+
+.sacola__foto {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--linha);
+  background: var(--branco);
+  width: 100%;
+}
+
+.sacola__nome {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.sacola__meta {
+  font-size: 0.82rem;
+  color: var(--taupe);
+  margin-bottom: 0.9rem;
+}
+
+.sacola__controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sacola__subtotal {
+  margin-left: auto;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sacola__remover {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--taupe-claro);
+  border-bottom: 1px solid transparent;
+  transition: color var(--transicao), border-color var(--transicao);
+}
+
+.sacola__remover:hover {
+  color: var(--tinta);
+  border-bottom-color: var(--tinta);
+}
+
+/* Estado vazio */
+.sacola__vazia {
+  text-align: center;
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+.sacola__vazia p {
+  color: var(--taupe);
+  margin-bottom: 1.75rem;
+}
+
+
+/* ==========================================================================
+   PAINEL / CARTÃO
+   ========================================================================== */
+.painel {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.painel__titulo {
+  font-family: var(--fonte-corpo);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 1.5rem;
+}
+
+.linha-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--taupe);
+}
+
+.linha-total--destaque {
+  margin-top: 0.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--linha);
+  font-size: 1.15rem;
+  font-family: var(--fonte-display);
+  color: var(--tinta);
+}
+
+
+/* ==========================================================================
+   FORMULÁRIO
+   ========================================================================== */
+.campo {
+  margin-bottom: 1.25rem;
+}
+
+.campo__rotulo {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 0.5rem;
+}
+
+.campo__entrada {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.9rem;
+  background: var(--areia);
+  border: 1px solid var(--linha-forte);
+  border-radius: 2px;
+  font-size: 1rem; /* 16px evita o zoom automático do iOS ao focar */
+  transition: border-color var(--transicao), background-color var(--transicao);
+}
+
+textarea.campo__entrada {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.campo__entrada:focus {
+  outline: none;
+  border-color: var(--taupe);
+  background: var(--branco);
+}
+
+.campo__entrada[aria-invalid='true'] {
+  border-color: #b4443c;
+}
+
+.campo__erro {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #b4443c;
+}
+
+.campo__erro:empty {
+  display: none;
+}
+
+.campo__dica {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--taupe-claro);
+}
+
+/* Checkbox de consentimento */
+.campo-check {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.campo-check input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.22rem;
+  accent-color: var(--taupe);
+}
+
+.campo-check label {
+  font-size: 0.84rem;
+  color: var(--taupe);
+  line-height: 1.55;
+}
+
+
+/* ==========================================================================
+   PIX / QR CODE
+   ========================================================================== */
+.pix {
+  text-align: center;
+}
+
+.pix__valor {
+  font-family: var(--fonte-display);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  margin-bottom: 0.35rem;
+}
+
+.pix__recebedor {
+  font-size: 0.85rem;
+  color: var(--taupe);
+  margin-bottom: 1.75rem;
+}
+
+.pix__qr {
+  display: inline-block;
+  padding: 0.75rem;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  margin-bottom: 1.5rem;
+  /* O QR nunca deve estourar a tela do celular */
+  max-width: 100%;
+}
+
+.pix__qr canvas,
+.pix__qr img {
+  /* O canvas tem largura fixa em px definida pelo JS; isso o deixa encolher */
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.pix__codigo {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--areia);
+  border: 1px solid var(--linha);
+  border-radius: 2px;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--taupe);
+  /* Quebra a string gigante do Pix em vez de esticar o layout */
+  word-break: break-all;
+  text-align: left;
+  max-height: 6.5rem;
+  overflow-y: auto;
+  margin-bottom: 0.875rem;
+  resize: none;
+}
+
+.pix__acoes {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.pix__passos {
+  text-align: left;
+  display: grid;
+  gap: 0.85rem;
+  counter-reset: passo;
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--linha);
+}
+
+.pix__passo {
+  position: relative;
+  padding-left: 2.1rem;
+  font-size: 0.88rem;
+  color: var(--taupe);
+}
+
+.pix__passo::before {
+  counter-increment: passo;
+  content: counter(passo);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.45rem;
+  height: 1.45rem;
+  display: grid;
+  place-items: center;
+  background: var(--areia);
+  border: 1px solid var(--linha-forte);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.pix__txid {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--taupe-claro);
+}
+
+.pix__txid strong {
+  color: var(--tinta);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+}
+
+
+/* ==========================================================================
+   AVISOS
+   ========================================================================== */
+.aviso {
+  padding: 0.9rem 1.1rem;
+  border-radius: 2px;
+  font-size: 0.87rem;
+  border: 1px solid;
+  margin-bottom: 1.25rem;
+}
+
+.aviso--info {
+  background: rgba(107, 96, 88, 0.07);
+  border-color: var(--linha-forte);
+  color: var(--taupe);
+}
+
+.aviso--erro {
+  background: rgba(180, 68, 60, 0.08);
+  border-color: rgba(180, 68, 60, 0.4);
+  color: #8f322c;
+}
+
+.aviso--sucesso {
+  background: rgba(31, 170, 84, 0.08);
+  border-color: rgba(31, 170, 84, 0.35);
+  color: #146b33;
+}
+
+
+/* ==========================================================================
+   ETAPAS DO CHECKOUT
+   ========================================================================== */
+.etapas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe-claro);
+  flex-wrap: wrap;
+}
+
+.etapas__item--ativa {
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.etapas__traco {
+  width: 1.5rem;
+  height: 1px;
+  background: var(--linha-forte);
+}
+
+
+/* ==========================================================================
+   BLOCO DE DIFERENCIAIS
+   ========================================================================== */
+.diferencial__icone {
+  width: 26px;
+  height: 26px;
+  color: var(--taupe);
+  margin-bottom: 1.1rem;
+}
+
+.diferencial__titulo {
+  font-size: 1.2rem;
+  margin-bottom: 0.55rem;
+}
+
+.diferencial__texto {
+  font-size: 0.92rem;
+  color: var(--taupe);
+  max-width: 34ch;
+}
+
+/* Imagem editorial de apoio */
+.moldura {
+  border: 1px solid var(--linha);
+  background: var(--branco);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.moldura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moldura--larga {
+  aspect-ratio: 3 / 2;
+}

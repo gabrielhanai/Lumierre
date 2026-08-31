@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lumierre Boutique — Óculos de sol autorais</title>
+  <meta name="description"
+        content="Óculos de sol autorais em séries pequenas. Cinco modelos, acabamento à mão, pagamento via Pix. Brasília, DF.">
+  <meta name="theme-color" content="#F4EFEB">
+
+  <!-- Compartilhamento no WhatsApp e Instagram -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lumierre Boutique — Óculos de sol autorais">
+  <meta property="og:description"
+        content="Cinco modelos em séries pequenas. Acabamento à mão. Pagamento via Pix.">
+  <meta property="og:image" content="assets/preto1.jpg">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <header class="cabecalho" data-cabecalho></header>
+
+  <main id="conteudo">
+
+    <!-- ====================================================================
+         HERO — vídeo em loop
+         O vídeo é mudo e com playsinline; sem esses dois atributos o
+         autoplay é bloqueado no iOS e no Android. O poster aparece
+         instantaneamente enquanto o vídeo carrega.
+         ==================================================================== -->
+    <section class="hero">
+      <div class="hero__midia">
+        <video class="hero__video"
+               autoplay muted loop playsinline
+               preload="auto"
+               poster="assets/preto1.jpg"
+               aria-hidden="true"
+               tabindex="-1"
+               data-hero-video>
+          <source src="assets/lumierre2_202608301848.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="hero__veu"></div>
+
+      <div class="hero__conteudo">
+        <p class="sobretitulo hero__sobretitulo">Coleção 2026</p>
+        <h1 class="hero__titulo">Discreto por fora.<br>Impossível de ignorar.</h1>
+        <p class="hero__texto">
+          Cinco modelos em séries pequenas e nenhuma peça
+          igual à outra. Feitos para quem já sabe o que quer.
+        </p>
+        <div class="hero__acoes">
+          <a class="btn btn--claro" href="produtos.html">Ver a coleção</a>
+          <a class="btn btn--contorno-claro" href="#sobre">Conhecer a marca</a>
+        </div>
+      </div>
+
+      <div class="hero__rolar" aria-hidden="true">
+        <span>Role</span>
+        <span class="hero__rolar-linha"></span>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         COLEÇÃO
+         ==================================================================== -->
+    <section class="secao" aria-labelledby="colecao-titulo">
+      <div class="container">
+        <div class="centro" data-revelar>
+          <p class="sobretitulo">A coleção</p>
+          <h2 class="secao__titulo" id="colecao-titulo">Cinco modelos, uma assinatura</h2>
+          <p class="secao__intro">
+            Todos ao mesmo preço, porque nenhum vale mais que o outro — a
+            escolha é só sobre quem você é hoje.
+          </p>
+        </div>
+
+        <div class="grade-produtos" data-grade-produtos
+             style="margin-top: clamp(2.5rem, 6vw, 4rem)"></div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         SOBRE A MARCA
+         ==================================================================== -->
+    <section class="secao" id="sobre" aria-labelledby="sobre-titulo"
+             style="background: var(--branco); border-block: 1px solid var(--linha)">
+      <div class="container grade-dupla">
+        <div data-revelar>
+          <p class="sobretitulo">A marca</p>
+          <h2 class="secao__titulo" id="sobre-titulo">Feito em série pequena,<br>de propósito</h2>
+          <!-- [PLACEHOLDER] — trocar pelo texto real da marca -->
+          <p class="secao__intro" style="margin-bottom: 1.25rem">
+            A Lumierre nasceu da ideia simples de que um bom
+            par de óculos não precisa gritar. Trabalhamos com lotes pequenos,
+            escolhidos peça a peça.
+          </p>
+          <p class="secao__intro" style="margin-bottom: 2rem">
+            Não fazemos reposição infinita: quando um modelo
+            acaba, ele acaba. É o que garante que você não vai cruzar com o seu
+            na mesma festa.
+          </p>
+          <a class="btn btn--secundario" href="produtos.html">Ver os modelos</a>
+        </div>
+
+        <div class="moldura" data-revelar>
+          <img src="assets/jaguar2.jpg"
+               alt="Óculos Lumierre Jaguar, com armação em acetato padrão tartaruga"
+               loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         DIFERENCIAIS
+         ==================================================================== -->
+    <section class="secao" aria-labelledby="diferenciais-titulo">
+      <div class="container">
+        <h2 class="sr-apenas" id="diferenciais-titulo">Por que comprar na Lumierre</h2>
+
+        <div class="grade-tres">
+          <div data-revelar>
+            <svg class="diferencial__icone" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="7" cy="13" r="4.2"/>
+              <circle cx="17" cy="13" r="4.2"/>
+              <path d="M11.2 13c.5-.6 1.1-.6 1.6 0M2.8 10.5 5 8.6M21.2 10.5 19 8.6"
+                    stroke-linecap="round"/>
+            </svg>
+            <!-- [PLACEHOLDER] -->
+            <h3 class="diferencial__titulo">Durabilidade</h3>
+            <p class="diferencial__texto">
+              Óculos feitos para durar. Acabamento à mão, armação de alta qualidade e lentes resistentes a riscos.
+            </p>
+          </div>
+
+          <div data-revelar>
+            <svg class="diferencial__icone" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <path d="M12 2.5 20 6v6c0 4.6-3.2 8.2-8 9.5-4.8-1.3-8-4.9-8-9.5V6l8-3.5z"
+                    stroke-linejoin="round"/>
+              <path d="m8.8 12 2.2 2.2 4.2-4.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="diferencial__titulo">Proteção UV400</h3>
+            <p class="diferencial__texto">
+              Todas as lentes bloqueiam 100% dos raios UVA e
+              UVB, sem exceção de modelo.
+            </p>
+          </div>
+
+          <div data-revelar>
+            <svg class="diferencial__icone" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <path d="M14 14h3v3h-3zM20 14h1M14 20h3M20 17v4" stroke-linecap="round"/>
+            </svg>
+            <h3 class="diferencial__titulo">Pagamento por Pix</h3>
+            <p class="diferencial__texto">
+              QR Code gerado na hora com o valor já
+              preenchido. Sem cadastro e sem burocracia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         CHAMADA FINAL
+         ==================================================================== -->
+    <section class="secao" style="background: var(--branco); border-top: 1px solid var(--linha)">
+      <div class="container centro" data-revelar>
+        <p class="sobretitulo">Ainda em dúvida?</p>
+        <h2 class="secao__titulo">Fale com a gente</h2>
+        <p class="secao__intro" style="margin-bottom: 2rem">
+          Respondemos rápido no WhatsApp e ajudamos a escolher o modelo que
+          combina com o seu rosto.
+        </p>
+        <div class="hero__acoes">
+          <a class="btn btn--whatsapp" data-link-whatsapp target="_blank" rel="noopener" href="#">
+            Chamar no WhatsApp
+          </a>
+          <a class="btn btn--secundario" data-link-instagram target="_blank" rel="noopener" href="#">
+            Ver o Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape" data-rodape></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderizarGrade('[data-grade-produtos]');
+
+      // Os links de contato saem do config.js, então existem em um lugar só
+      const whats = document.querySelector('[data-link-whatsapp]');
+      if (whats) {
+        whats.href = linkWhatsApp('Olá! Vim pelo site da Lumierre e queria ajuda para escolher um modelo.');
+      }
+      const insta = document.querySelector('[data-link-instagram]');
+      if (insta) insta.href = linkInstagram();
+    });
+  </script>
+</body>
+</html>

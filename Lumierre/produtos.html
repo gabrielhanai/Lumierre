@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Coleção — Lumierre Boutique</title>
+  <meta name="description"
+        content="Os cinco modelos da Lumierre Boutique. Séries pequenas, acabamento à mão, pagamento via Pix.">
+  <meta name="theme-color" content="#F4EFEB">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Coleção — Lumierre Boutique">
+  <meta property="og:description" content="Cinco modelos em séries pequenas. Acabamento à mão.">
+  <meta property="og:image" content="assets/azul1.jpg">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <header class="cabecalho" data-cabecalho></header>
+
+  <main id="conteudo">
+
+    <section class="hero-pagina">
+      <div class="container centro">
+        <p class="sobretitulo">Coleção 2026</p>
+        <h1 style="font-size: clamp(2.25rem, 5.5vw, 3.5rem)">A coleção completa</h1>
+        <p class="secao__intro" style="margin-top: 1rem">
+          Cinco modelos, todos a <span data-preco-unitario>R$ 50,00</span>.
+          Séries pequenas — quando acaba, não repõe.
+        </p>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="container">
+        <div class="grade-produtos" data-grade-produtos></div>
+      </div>
+    </section>
+
+    <section class="secao" style="background: var(--branco); border-top: 1px solid var(--linha)">
+      <div class="container centro" data-revelar>
+        <p class="sobretitulo">Não achou o seu?</p>
+        <h2 class="secao__titulo">Chama a gente no WhatsApp</h2>
+        <p class="secao__intro" style="margin-bottom: 2rem">
+          Às vezes temos peças que ainda não subiram para o site. Clique abaixo para suporte
+        </p>
+        <a class="btn btn--whatsapp" data-link-whatsapp target="_blank" rel="noopener" href="#">
+          Chamar no WhatsApp
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape" data-rodape></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderizarGrade('[data-grade-produtos]');
+
+      const preco = document.querySelector('[data-preco-unitario]');
+      if (preco) preco.textContent = formatarPreco(PRECO_UNITARIO);
+
+      const whats = document.querySelector('[data-link-whatsapp]');
+      if (whats) {
+        whats.href = linkWhatsApp('Olá! Vi a coleção no site e queria saber se tem outros modelos disponíveis.');
+      }
+    });
+  </script>
+</body>
+</html>

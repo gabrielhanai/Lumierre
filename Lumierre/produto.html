@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Modelo — Lumierre Boutique</title>
+  <meta name="description" content="Detalhes do modelo. Lumierre Boutique — óculos de sol autorais.">
+  <meta name="theme-color" content="#F4EFEB">
+  <meta property="og:type" content="product">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <header class="cabecalho" data-cabecalho></header>
+
+  <main id="conteudo">
+    <section class="secao" style="padding-top: clamp(2rem, 5vw, 3.5rem)">
+      <div class="container">
+
+        <!-- Trilha de navegação -->
+        <nav aria-label="Você está aqui"
+             style="margin-bottom: clamp(1.5rem, 4vw, 2.5rem); font-size: 0.82rem; color: var(--taupe)">
+          <a class="link-texto" href="produtos.html">Coleção</a>
+          <span aria-hidden="true" style="margin-inline: 0.5rem">/</span>
+          <span data-trilha-nome>Modelo</span>
+        </nav>
+
+        <!-- Preenchido por js/pagina-produto.js -->
+        <div data-produto-detalhe></div>
+
+      </div>
+    </section>
+
+    <!-- Outros modelos -->
+    <section class="secao" data-secao-relacionados hidden
+             style="background: var(--branco); border-top: 1px solid var(--linha)">
+      <div class="container">
+        <div class="centro" style="margin-bottom: clamp(2.5rem, 6vw, 3.5rem)">
+          <p class="sobretitulo">Continue olhando</p>
+          <h2 class="secao__titulo">Outros modelos</h2>
+        </div>
+        <div class="grade-produtos" data-grade-relacionados></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape" data-rodape></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pagina-produto.js"></script>
+</body>
+</html>

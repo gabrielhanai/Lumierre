@@ -1,0 +1,513 @@
+/* ==========================================================================
+   LUMIERRE BOUTIQUE — Layout
+   Cabeçalho, rodapé, grades e hero. Escrito mobile-first: as regras base
+   valem para o celular e os @media vão ampliando a partir daí.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   CABEÇALHO
+   ========================================================================== */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 239, 235, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--linha);
+}
+
+.cabecalho__interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding: 0.875rem var(--gutter);
+}
+
+/* --- Marca --- */
+.marca {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.marca__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--tinta);
+}
+
+.marca__sub {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  color: var(--taupe);
+  margin-top: 0.3rem;
+}
+
+/* --- Navegação --- */
+.nav {
+  /* No celular vira um painel que desce abaixo do cabeçalho */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--areia);
+  border-bottom: 1px solid var(--linha);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transicao);
+}
+
+.nav--aberta {
+  max-height: 22rem;
+}
+
+.nav__lista {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem var(--gutter) 1.25rem;
+}
+
+.nav__link {
+  display: block;
+  padding: 0.85rem 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--tinta);
+  border-bottom: 1px solid var(--linha);
+  transition: color var(--transicao);
+}
+
+.nav__link:hover,
+.nav__link--ativo {
+  color: var(--taupe);
+}
+
+/* --- Botão hambúrguer --- */
+.cabecalho__menu-btn {
+  /* 44px de alvo de toque, mínimo confortável no celular */
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  order: 2;
+}
+
+.hamburguer,
+.hamburguer::before,
+.hamburguer::after {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--tinta);
+  transition: transform var(--transicao), opacity var(--transicao);
+}
+
+.hamburguer::before,
+.hamburguer::after {
+  content: '';
+  position: absolute;
+}
+
+.hamburguer::before {
+  transform: translateY(-7px);
+}
+
+.hamburguer::after {
+  transform: translateY(7px);
+}
+
+[aria-expanded='true'] .hamburguer {
+  background: transparent;
+}
+
+[aria-expanded='true'] .hamburguer::before {
+  transform: rotate(45deg);
+}
+
+[aria-expanded='true'] .hamburguer::after {
+  transform: rotate(-45deg);
+}
+
+/* --- Ícone da sacola --- */
+.sacola-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  order: 3;
+  color: var(--tinta);
+  transition: color var(--transicao);
+}
+
+.sacola-link:hover {
+  color: var(--taupe);
+}
+
+.sacola-link__icone {
+  width: 22px;
+  height: 22px;
+}
+
+.sacola-link__contador {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  padding-inline: 4px;
+  display: grid;
+  place-items: center;
+  background: var(--tinta);
+  color: var(--branco);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 999px;
+}
+
+/* --- Cabeçalho no desktop --- */
+@media (min-width: 768px) {
+  .cabecalho__menu-btn {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    background: none;
+    border: none;
+    margin-left: auto;
+    order: 2;
+  }
+
+  .nav__lista {
+    flex-direction: row;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    padding: 0;
+  }
+
+  .nav__link {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid transparent;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .nav__link--ativo,
+  .nav__link:hover {
+    border-bottom-color: var(--taupe);
+  }
+
+  .sacola-link {
+    margin-left: clamp(1.5rem, 3vw, 2.75rem);
+  }
+}
+
+
+/* ==========================================================================
+   HERO com vídeo
+   ========================================================================== */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* O cabeçalho é sticky, então ocupa espaço no fluxo: descontamos a altura
+     dele para a primeira dobra caber exatamente na tela — senão o indicador
+     de rolagem nasce cortado no celular.
+     100svh usa a altura REAL do viewport no celular, descontando a barra do
+     navegador. O 100vh do fallback fica atrás para navegadores antigos. */
+  min-height: calc(100vh - var(--altura-cabecalho));
+  min-height: calc(100svh - var(--altura-cabecalho));
+  overflow: hidden;
+  text-align: center;
+  color: var(--branco);
+}
+
+.hero__midia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__video,
+.hero__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__poster {
+  position: absolute;
+  inset: 0;
+}
+
+/* Véu escuro para o texto ter contraste sobre qualquer frame do vídeo */
+.hero__veu {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(46, 42, 38, 0.5) 0%,
+    rgba(46, 42, 38, 0.34) 45%,
+    rgba(46, 42, 38, 0.62) 100%
+  );
+}
+
+.hero__conteudo {
+  position: relative;
+  z-index: 2;
+  padding: 6rem var(--gutter) 7rem;
+  max-width: 46rem;
+}
+
+.hero__sobretitulo {
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 1.25rem;
+}
+
+.hero__titulo {
+  color: var(--branco);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 30px rgba(46, 42, 38, 0.3);
+}
+
+.hero__texto {
+  max-width: 34rem;
+  margin: 0 auto 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+}
+
+.hero__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  align-items: center;
+}
+
+@media (min-width: 480px) {
+  .hero__acoes {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* Seta de rolagem */
+.hero__rolar {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.hero__rolar-linha {
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+  animation: pulsar-linha 2.4s ease-in-out infinite;
+}
+
+@keyframes pulsar-linha {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+  50%      { opacity: 1;   transform: scaleY(1);   transform-origin: top; }
+}
+
+/* Hero interno, usado nas páginas que não são a inicial */
+.hero-pagina {
+  padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2rem, 5vw, 3rem);
+  border-bottom: 1px solid var(--linha);
+}
+
+
+/* ==========================================================================
+   GRADES
+   ========================================================================== */
+
+/* Vitrine de produtos: 1 coluna → 2 → 3 */
+.grade-produtos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+@media (min-width: 560px) {
+  .grade-produtos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grade-produtos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Grade de dois blocos genérica (texto + imagem) */
+.grade-dupla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .grade-dupla {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Trio de diferenciais */
+.grade-tres {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+@media (min-width: 720px) {
+  .grade-tres {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+.rodape {
+  margin-top: auto;
+  background: var(--branco);
+  border-top: 1px solid var(--linha);
+}
+
+/* --- FAQ --- */
+.faq {
+  padding-block: var(--espaco-secao);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faq__titulo {
+  text-align: center;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.faq__lista {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+/* --- Rodapé principal --- */
+.rodape__principal {
+  padding-top: clamp(3rem, 7vw, 4.5rem);
+  padding-bottom: 2rem;
+}
+
+.rodape__grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+@media (min-width: 640px) {
+  .rodape__grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .rodape__grade {
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+    gap: 3rem;
+  }
+}
+
+.marca--rodape {
+  margin-bottom: 1.25rem;
+}
+
+.rodape__titulo {
+  font-family: var(--fonte-corpo);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 1.25rem;
+}
+
+.rodape__texto {
+  color: var(--taupe);
+  font-size: 0.92rem;
+  max-width: 30ch;
+}
+
+.rodape__texto--menor {
+  font-size: 0.82rem;
+  margin-top: 1rem;
+}
+
+.rodape__lista {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.rodape__lista a {
+  font-size: 0.92rem;
+  color: var(--tinta);
+  transition: color var(--transicao);
+}
+
+.rodape__lista a:hover {
+  color: var(--taupe);
+}
+
+.rodape__base {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--linha);
+  font-size: 0.78rem;
+  color: var(--taupe-claro);
+}
+
+@media (min-width: 640px) {
+  .rodape__base {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Cola o rodapé no fim mesmo em páginas curtas */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
